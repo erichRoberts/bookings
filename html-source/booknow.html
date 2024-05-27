@@ -1,136 +1,170 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Booking App</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Booking App</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
   <style>
-  .my-footer{
-  background-color:#777777;
-  color:white;
-  font-size:80%;
-  margin-top:1em;
-  padding:1em;
-  height:5em;
-  }
-  
-  .room-image{
-  max-width:50%;
-  }
+    .my-footer {
+      background-color: #777777;
+      color: white;
+      font-size: 80%;
+      margin-top: 1em;
+      padding: 1em;
+      height: 5em;
+    }
+
+    .room-image {
+      max-width: 50%;
+    }
   </style>
-  
-  </head>
-  
-  <body>
+
+</head>
+
+<body>
   <!-- The Menu -->
   <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body" data-bs-theme="dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-        </li>
-		<li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="about.html">About</a>
-        </li>
-        
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Rooms
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="bigroom.html">Big Room</a></li>
-            <li><a class="dropdown-item" href="littleroom.html">Little Room</a></li>
-            
-          </ul>
-        </li>
-	    <li class="nav-item">
-		  <a class="nav-link active" aria-current="page" href="booknow.html">Booking</a>
-	    </li>
-		<li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="contact.html">Contact</a>
-        </li>
-      </ul>
-      
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="about.html">About</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Rooms
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="bigroom.html">Big Room</a></li>
+              <li><a class="dropdown-item" href="littleroom.html">Little Room</a></li>
+
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="booknow.html">Booking</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="contact.html">Contact</a>
+          </li>
+        </ul>
+
+      </div>
     </div>
-  </div>
-</nav>
-  
+  </nav>
+
   <div class="container">
-  
-		
-  
-		  
-	   <!-- The main text -->
-	  <div class="row">
-	  
-	  	<!-- Spacer Col -->
-		<div class="col-3"></div>
-		<div class="col-md-6"	>
-			<h1 class="text-center mt-5">Search for Availability</h1>
-			
-			<!-- The Form -->
-			<form action="booknow.html" method="get">
-			<div class="row">
-			
-			
-				
-				<!-- Start Date -->
-				<div class="col">
-					<div class="mb-3">
-						<label for="start_date" class="form-label">Starting Date</label>
-						<input type="date" class="form-control" id="start_date" name="start_date" aria-describedby="start_dateHelp" required>
-						<div id="start_dateHelp" class="form-text">Enter the Starting Date</div>
-					</div>
-				</div>
-				
-				<!-- End Date -->
-				<div class="col">
-					<div class="mb-3">
-						<label for="end_date" class="form-label">End Date</label>
-						<input type="date" class="form-control" id="end_date" name="end_date" aria-describedby="end_dateHelp" required>
-						<div id="end_dateHelp" class="form-text">Enter the End Date</div>
-					</div>			  
-				</div>
-			
-			</div>
-			
-			<!-- Submit Button   -->
-			<button type="submit" class="btn btn-primary">Search Availability</button>
-			  
-			</form>
-		</div>
-		
-		  
-		  
-	  
-	  </div>
-	  
+
+
+
+
+    <!-- The main text -->
+    <div class="row">
+
+      <!-- Spacer Col -->
+      <div class="col-3"></div>
+      <div class="col-md-6">
+        <h1 class="text-center mt-5">Search for Availability</h1>
+
+        <!-- The Form -->
+        <form action="booknow.html" method="get" class="needs-validation">
+          <div class="row">
+
+
+
+            <!-- Start Date -->
+            <div class="col">
+              <div class="mb-3">
+                <label for="start_date" class="form-label">Starting Date</label>
+                <input type="date" class="form-control" id="start_date" name="start_date"
+                  aria-describedby="start_dateHelp" required>
+                <div id="start_dateHelp" class="form-text">Enter the Starting Date</div>
+              </div>
+            </div>
+
+            <!-- End Date -->
+            <div class="col">
+              <div class="mb-3">
+                <label for="end_date" class="form-label">End Date</label>
+                <input type="date" class="form-control" id="end_date" name="end_date" aria-describedby="end_dateHelp"
+                  required>
+                <div id="end_dateHelp" class="form-text">Enter the End Date</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Submit Button   -->
+          <button type="submit" class="btn btn-primary">Search Availability</button>
+
+        </form>
+      </div>
+
+
+
+
+    </div>
+
   </div>
-  
-	<!-- The footer -->
+
+  <!-- The footer -->
   <div class="row my-footer">
-	  
-		  <div class="col">
-		  Left
-		  </div>
-		  
-		  <div class="col">
-		  Middle
-		  </div>
-		  
-		  <div class="col">
-		  Right
-		  </div>
-	  
-	  </div>
-  
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
+
+    <div class="col">
+      Left
+    </div>
+
+    <div class="col">
+      Middle
+    </div>
+
+    <div class="col">
+      Right
+    </div>
+
+  </div>
+
+  <script>
+
+    console.log("starting reservation");
+
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+      'use strict'
+
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      const forms = document.querySelectorAll('.needs-validation')
+
+      // Loop over them and prevent submission
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+    })()
+
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>
