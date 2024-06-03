@@ -47,3 +47,23 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 		StringMap: stringMap,
 	})
 }
+
+// Bigroom presents the Bigroom page
+func (m *Repository) Bigroom(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "bigroom.page.tmpl", &models.TemplateData{})
+}
+
+// Littleroom present the Littleroom page
+func (m *Repository) Littleroom(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "littleroom.page.tmpl", &models.TemplateData{})
+}
+
+// Booknow presents the search-availability page
+func (m *Repository) Booknow(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "search-availability.page.tmpl", &models.TemplateData{})
+}
+
+// Contact present the contact page
+func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "contact.page.tmpl", &models.TemplateData{})
+}

@@ -1,0 +1,80 @@
+{{template "base" .}}
+
+{{define "content"}}
+<div class="container">
+  
+    <div class="row">
+    
+            
+        <div class="col">
+            <img class="img-fluid img-thumbnail room-image mx-auto d-block" src="./static/images/generals-quarters.png" alt="big room picture">
+        </div>
+        
+        
+    </div>
+
+      
+   <!-- The main text -->
+  <div class="row">
+      <h1 class="text-center">The Big Room</h1>
+      
+      <p>
+      This is the blurb about the rooms. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. 
+      This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. 
+      This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. 
+      This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. 
+      This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. 
+      This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. 
+      </p>
+      <p>
+        <a class="btn btn-success" id="bookit">Check Availabilityx</a>
+        <!-- <a href="booknowbr.html" class="btn btn-success" id="bookit">Check Availability</a> -->
+      </p>
+  
+  </div>
+  
+</div>
+{{end}}
+
+{{define "js"}}
+<script>
+    
+// add a clickevent to the colorButton
+document.getElementById("bookit").addEventListener("click", function () {
+
+  let html = `
+    <form id="check-availability-form" action="" method="post" novalidate class="needs-validation">
+      <div class="form-row">
+        <div class="col">
+          <div class="row" id="reservation-dates-modal">
+            <div class="col">
+              <input disabled type="text" name="start" class="form-control" required placeholder="Arrival Date" id="start">
+            </div>
+
+            <div class="col">
+              <input  disabled type="text" name="end" class="form-control" required placeholder="Departure Date" id="end">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  `;
+
+  let myEl = document.getElementById("myParagraph");
+  if (myEl.classList.contains("red-text")) {
+    notify('Going Black', 'error');
+    attention.toast({ msg: "Gone back to Black" });
+    // notifyModal("The Modal","Going Black","info","Continue?");
+    myEl.classList.remove("red-text");
+  } else {
+    // attention.success({ title: "Congrats", msg: "Record Written", footer: "Well Done" });
+    attention.custom({ msg: html, title: "Choose your dates" });
+    notify('Going Red', 'success');
+    myEl.classList.add("red-text");
+  }
+
+
+})
+
+</script>
+{{end}}
