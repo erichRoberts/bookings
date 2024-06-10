@@ -2,47 +2,48 @@
 
 {{define "content"}}
 <div class="container">
-  
-    <div class="row">
-    
-            
-        <div class="col">
-            <img class="img-fluid img-thumbnail room-image mx-auto d-block" src="./static/images/generals-quarters.png" alt="big room picture">
-        </div>
-        
-        
+
+  <div class="row">
+
+
+    <div class="col">
+      <img class="img-fluid img-thumbnail room-image mx-auto d-block" src="./static/images/generals-quarters.png"
+        alt="big room picture">
     </div>
 
-      
-   <!-- The main text -->
-  <div class="row">
-      <h1 class="text-center">The Big Room</h1>
-      
-      <p>
-      This is the blurb about the rooms. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. 
-      This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. 
-      This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. 
-      This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. 
-      This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. 
-      This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. 
-      </p>
-      <p>
-        <a class="btn btn-success" id="bookit">Check Availabilityx</a>
-        <!-- <a href="booknowbr.html" class="btn btn-success" id="bookit">Check Availability</a> -->
-      </p>
-  
+
   </div>
-  
+
+
+  <!-- The main text -->
+  <div class="row">
+    <h1 class="text-center">The Big Room</h1>
+
+    <p>
+      This is the Big Room Info page. This is the Big Room Info page.
+      This is the Big Room Info page. This is the Big Room Info page. This is the Big Room Info page.
+      This is the Big Room Info page. This is the Big Room Info page.
+      This is the Big Room Info page. This is the Big Room Info page. This is the Big Room Info page.
+    </p>
+
+
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <a href='#!' class="btn btn-success" id="bookit">Check Availability</a>
+    </div>
+  </div>
+
 </div>
 {{end}}
 
 {{define "js"}}
 <script>
-    
-// add a clickevent to the colorButton
-document.getElementById("bookit").addEventListener("click", function () {
 
-  let html = `
+  // add a clickevent to the colorButton
+  document.getElementById("bookit").addEventListener("click", function () {
+
+    let html = `
     <form id="check-availability-form" action="" method="post" novalidate class="needs-validation">
       <div class="form-row">
         <div class="col">
@@ -59,22 +60,46 @@ document.getElementById("bookit").addEventListener("click", function () {
       </div>
     </form>
   `;
+    attention.custom({
+      msg: html,
+      title: "Choose your dates",
 
-  let myEl = document.getElementById("myParagraph");
-  if (myEl.classList.contains("red-text")) {
-    notify('Going Black', 'error');
-    attention.toast({ msg: "Gone back to Black" });
-    // notifyModal("The Modal","Going Black","info","Continue?");
-    myEl.classList.remove("red-text");
-  } else {
-    // attention.success({ title: "Congrats", msg: "Record Written", footer: "Well Done" });
-    attention.custom({ msg: html, title: "Choose your dates" });
-    notify('Going Red', 'success');
-    myEl.classList.add("red-text");
-  }
+      willOpen: () => {
+            const elem = document.getElementById('reservation-dates-modal');
+            const rangepicker = new DateRangePicker(elem, {
+              format: "yyyy-mm-dd",
+              showOnFocus: true,
+            });
+          },
+
+          didOpen: () => {
+            document.getElementById('start').removeAttribute('disabled');
+            document.getElementById('end').removeAttribute('disabled');
+          },
+              
+      callback: function (result) {
+        console.log("called")
+        let form = document.getElementById("check-availability-form");
+        let formData = new FormData(form);
+        formData.append("csrf_token", "{{.CSRFToken}}");
+
+        fetch('/search-availability-json', {
+          method: "post",
+          body: formData,
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data)
+            console.log(data.ok)
+            console.log(data.message)
+          })
+      }
+    });
 
 
-})
+
+  })
+
 
 </script>
 {{end}}

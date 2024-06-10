@@ -16,7 +16,7 @@
       
    <!-- The main text -->
   <div class="row">
-      <h1 class="text-center">The Little Room</h1>
+      <h1 class="text-center">The Little Room (Updated)</h1>
       
       <p>
       This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. 
@@ -26,12 +26,48 @@
       This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. 
       This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. This is the blurb about the cabins. 
       </p>
-      <p>
-        <a href="booknowlr.html" class="btn btn-success">Check Availability</a>
-      </p>
+      
   
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <a href='#!' class="btn btn-success" id="bookit">Check Availability</a>
+    </div>
   </div>
   
 </div>
     
+{{end}}
+
+{{define "js"}}
+<script>
+
+  // add a clickevent to the colorButton
+  document.getElementById("bookit").addEventListener("click", function () {
+
+    let html = `
+    <form id="check-availability-form" action="" method="post" novalidate class="needs-validation">
+      <div class="form-row">
+        <div class="col">
+          <div class="row" id="reservation-dates-modal">
+            <div class="col">
+              <input disabled type="text" name="start" class="form-control" required placeholder="Arrival Date" id="start">
+            </div>
+
+            <div class="col">
+              <input  disabled type="text" name="end" class="form-control" required placeholder="Departure Date" id="end">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  `;
+  attention.custom({ msg: html, title: "Choose your dates" });
+    
+
+
+  })
+
+
+</script>
 {{end}}

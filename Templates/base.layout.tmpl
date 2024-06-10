@@ -46,7 +46,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/booknow">Booking</a>
+            <a class="nav-link active" aria-current="page" href="/search-availability">Booking</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/contact">Contact</a>
@@ -116,10 +116,7 @@
 
 
 
-    const elem = document.getElementById('reservation-dates');
-    const rangepicker = new DateRangePicker(elem, {
-      // ...options
-    });
+
 
     // notify will show a notie.alert
     function notify(msg, msgType) {
@@ -200,22 +197,21 @@
           title = "",
         } = c;
 
-        const { value: formValues } = await Swal.fire({
+        const { value: result,isDismissed: dismissed,dismiss: DismissReason } = await Swal.fire({
           title: title,
           html: msg,
           backdrop: false,
           showCancelButton: true,
           focusConfirm: false,
-          willOpen: () => {
-            const elem = document.getElementById('reservation-dates-modal');
-            const rangepicker = new DateRangePicker(elem, {
-              format: "yyyy-mm-dd",
-              showOnFocus: true,
-            });
+          willOpen:()=>{
+            if(c.willOpen!==undefined){
+              c.willOpen();
+            }
           },
           didOpen: () => {
-            document.getElementById('start').removeAttribute('disabled');
-            document.getElementById('end').removeAttribute('disabled');
+            if(c.didOpen!==undefined){
+              c.didOpen();
+            }
           },
           preConfirm: () => {
             return [
@@ -224,8 +220,31 @@
             ];
           }
         });
-        if (formValues) {
-          Swal.fire(JSON.stringify(formValues));
+
+        if (dismissed){
+          console.log(dismissed)
+          console.log(DismissReason)
+        }
+
+        if (result) {
+
+          if (result.dismiss !== Swal.DismissReason.cancel) {
+
+            if (result.value !== "") {
+              if (c.callback !== undefined) {
+
+                c.callback(result)
+              }
+            } else {
+
+              c.callback(false)
+            }
+          } else {
+
+            c.callback(false)
+          }
+        } else {
+
         }
       }
 

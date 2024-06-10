@@ -6,15 +6,18 @@ import (
 	"time"
 
 	"github.com/alexedwards/scs/v2"
-	"github.com/erichRoberts/bookings/pkg/config"
-	"github.com/erichRoberts/bookings/pkg/handlers"
-	"github.com/erichRoberts/bookings/pkg/render"
+	"github.com/erichRoberts/bookings/internal/config"
+	"github.com/erichRoberts/bookings/internal/handlers"
+	"github.com/erichRoberts/bookings/internal/render"
 )
 
 // portNumber is the port that will be listened to
 const portNumber = ":8080"
 
+// app is the config for the current session
 var app config.AppConfig
+
+// session is a pointer to the scs.SessionManager
 var session *scs.SessionManager
 
 func main() {
@@ -24,6 +27,7 @@ func main() {
 
 	println("starting")
 
+	// set up the session
 	session = scs.New()
 	session.Lifetime = 24 * time.Hour
 	session.Cookie.Persist = false
@@ -32,6 +36,7 @@ func main() {
 
 	app.Session = session
 
+	// create the themplate cache and store it in the app
 	tc, err := render.CreateTemplateCache()
 	if err != nil {
 		log.Fatal("Cannot create template cache")
@@ -45,11 +50,8 @@ func main() {
 
 	render.NewTemplates(&app)
 
-	// http.HandleFunc("/", handlers.Repo.Home)
-	// http.HandleFunc("/about", handlers.Repo.About)
-
+	// start the server
 	println("Server listening on port ", portNumber)
-	// http.ListenAndServe(portNumber, nil)
 	srv := &http.Server{
 		Addr:    portNumber,
 		Handler: routes(&app),
