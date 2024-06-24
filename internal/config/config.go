@@ -15,7 +15,11 @@ type AppConfig struct {
 	// TempateCache is a cache of templates that have already been parsed and are ready to be executed
 	TemplateCache map[string]*template.Template
 
+	// InfoLog is the Information level logger
 	InfoLog *log.Logger
+
+	// ErrorLog is the Error level logger
+	ErrorLog *log.Logger
 
 	// InProduction should be set to true for production
 	InProduction bool

@@ -1,13 +1,17 @@
 package main
 
 import (
+	"encoding/gob"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/alexedwards/scs/v2"
 	"github.com/erichRoberts/bookings/internal/config"
 	"github.com/erichRoberts/bookings/internal/handlers"
+	"github.com/erichRoberts/bookings/internal/helpers"
+	"github.com/erichRoberts/bookings/internal/models"
 	"github.com/erichRoberts/bookings/internal/render"
 )
 
@@ -20,10 +24,38 @@ var app config.AppConfig
 // session is a pointer to the scs.SessionManager
 var session *scs.SessionManager
 
+var infoLog *log.Logger
+var errorLog *log.Logger
+
 func main() {
+	err := run()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// start the server
+	println("Server listening on port ", portNumber)
+	srv := &http.Server{
+		Addr:    portNumber,
+		Handler: routes(&app),
+	}
+	err = srv.ListenAndServe()
+	log.Fatal(err)
+}
+
+func run() error {
+	// what will be stored in the session
+	gob.Register(models.Reservation{})
 
 	// change this to true when in production
 	app.InProduction = false
+
+	// set up the loggers
+	infoLog = log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
+	app.InfoLog = infoLog
+
+	errorLog = log.New(os.Stdout, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
+	app.ErrorLog = errorLog
 
 	println("starting")
 
@@ -47,15 +79,8 @@ func main() {
 
 	repo := handlers.NewRepo(&app)
 	handlers.NewHandlers(repo)
-
 	render.NewTemplates(&app)
+	helpers.NewHelpers(&app)
 
-	// start the server
-	println("Server listening on port ", portNumber)
-	srv := &http.Server{
-		Addr:    portNumber,
-		Handler: routes(&app),
-	}
-	err = srv.ListenAndServe()
-	log.Fatal(err)
+	return nil
 }

@@ -49,6 +49,9 @@
             <a class="nav-link active" aria-current="page" href="/search-availability">Booking</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/make-reservation">Make Reservation</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/contact">Contact</a>
           </li>
         </ul>
@@ -137,6 +140,18 @@
       })
     }
 
+    {{ with .Error}}
+    notify("{{.}}", "error")
+    {{ end }}
+
+    {{ with .Warning}}
+    notify("{{.}}", "warning")
+    {{ end }}
+    
+    {{ with .Flash}}
+    notify("{{.}}", "success")
+    {{ end }}
+
     /* prompt sets up notification functions for toast, success, error and custom */
     function prompt() {
       let toast = function (c) {
@@ -197,19 +212,19 @@
           title = "",
         } = c;
 
-        const { value: result,isDismissed: dismissed,dismiss: DismissReason } = await Swal.fire({
+        const { value: result, isDismissed: dismissed, dismiss: DismissReason } = await Swal.fire({
           title: title,
           html: msg,
           backdrop: false,
           showCancelButton: true,
           focusConfirm: false,
-          willOpen:()=>{
-            if(c.willOpen!==undefined){
+          willOpen: () => {
+            if (c.willOpen !== undefined) {
               c.willOpen();
             }
           },
           didOpen: () => {
-            if(c.didOpen!==undefined){
+            if (c.didOpen !== undefined) {
               c.didOpen();
             }
           },
@@ -221,7 +236,7 @@
           }
         });
 
-        if (dismissed){
+        if (dismissed) {
           console.log(dismissed)
           console.log(DismissReason)
         }
